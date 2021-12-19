@@ -1,0 +1,17 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+#input{
+    border: none;
+    border-bottom:  1px solid black;
+    outline: none;
+}
+#word{
+    color: green;
+}
+#score{
+    color: darkblue;
+}
+#alert{
+    color: red;
+}
