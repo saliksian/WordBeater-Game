@@ -1,9 +1,16 @@
+window.addEventListener("load", init);
 var dom = document;
 
 var word = dom.getElementById("word");
+var input = dom.getElementById("input");
 
 var score = dom.getElementById("score");
+var Displaytime = dom.getElementById("Time");
 var msg = dom.getElementById("alert");
+var gamescore = 0;
+var time = 10;
+
+var playing;
 
 var words = [
   "becalm",
@@ -21,33 +28,51 @@ var words = [
   "extremum",
   "exultant",
 ];
-var gamescore = 0;
 
-var input = dom.getElementById("input");
+function init() {
+  showWord(words);
 
-word.innerHTML = `${words[0]}`;
+  input.addEventListener("input", mathchWords);
 
-function submit() {
-  var userinput = input.value;
-  if (userinput == word.innerHTML) {
+  setInterval(countDown, 1000);
+  setInterval(checkStatus, 50);
+}
+function mathchWords() {
+  if (matched()) {
+    showWord(words);
+    playing = true;
     gamescore++;
-  } else {
-    msg.innerHTML = `Game Over!!`;
+    time = 10
+    input.value = "";
   }
-
-  var index = parseInt(Math.random() * words.length);
-
-  word.innerHTML = `${words[index]}`;
-
-  score.innerHTML = `${gamescore}`;
-
-  input.value = "";
+  score.innerHTML = gamescore;
+}
+function matched() {
+  if (input.value === word.innerHTML) {
+    msg.innerHTML = `Correct!!`;
+    return true;
+  } else {
+    msg.innerHTML = "";
+    return false;
+  }
 }
 
-//code to press Enter key
-input.addEventListener("keyup", function (event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    document.getElementById("btn").click();
+function showWord(words) {
+  var index = parseInt(Math.random() * words.length);
+  word.innerHTML = words[index];
+}
+function countDown() {
+  if (time > 0) {
+    time--;
+  } else if (time == 0) {
+    playing = false;
   }
-});
+  Displaytime.innerHTML = time;
+}
+
+function checkStatus() {
+  if (!playing && time == 0) {
+    msg.innerHTML = `GameOver!!!`;
+    gamescore = 0;
+  }
+}
