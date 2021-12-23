@@ -8,7 +8,7 @@ var score = dom.getElementById("score");
 var Displaytime = dom.getElementById("Time");
 var msg = dom.getElementById("alert");
 var gamescore = 0;
-var time = 5;
+var time = 10;
 
 var playing;
 
@@ -2014,9 +2014,18 @@ function mathchWords() {
   if (matched()) {
     showWord(words);
     playing = true;
-    gamescore=gamescore+4;
-    time = 5;
+    gamescore = gamescore + 4;
     input.value = "";
+    if (gamescore >= 150 && gamescore < 250) {
+      time = 8;
+    } else if (gamescore >= 250 && gamescore<500) {
+      time = 5;
+    } else if (gamescore>=500) {
+        time = 3
+    }
+    else {
+      time = 10;
+    }
   }
   score.innerHTML = gamescore;
 }
