@@ -6,10 +6,11 @@ var input = dom.getElementById("input");
 
 var score = dom.getElementById("score");
 var Displaytime = dom.getElementById("Time");
+var result = dom.getElementById("result");
 var msg = dom.getElementById("alert");
 var gamescore = 0;
-var time = 10;
 
+var time = 10;
 var playing;
 
 var words = [
@@ -2002,7 +2003,10 @@ var words = [
   "zulu",
 ];
 
+const audioObj = new Audio("Future-Technology.mp3");
 function init() {
+
+    audioObj.play();
   showWord(words);
 
   input.addEventListener("input", mathchWords);
@@ -2031,7 +2035,9 @@ function mathchWords() {
 }
 function matched() {
   if (input.value === word.innerHTML) {
+    audioObj.play();
     msg.innerHTML = `Correct!!`;
+    result.innerHTML = "";
     return true;
   } else {
     msg.innerHTML = "";
@@ -2055,6 +2061,9 @@ function countDown() {
 function checkStatus() {
   if (!playing && time == 0) {
     msg.innerHTML = `GameOver!!!`;
+    var typedword = parseInt(score.innerHTML)/4;
+    result.innerHTML = `You Typed ${typedword} Words`;
+    audioObj.pause();
     gamescore = 0;
   }
 }

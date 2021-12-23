@@ -12,7 +12,17 @@
 #score{
     color: darkblue;
 }
+#Time{
+    color: red;
+}
 #alert{
     color: red;
+    font-size: x-small
+}
+#result{
+    color: red;
     font-size: smaller;
+}
+.time{
+    margin-left: 4rem;
 }
